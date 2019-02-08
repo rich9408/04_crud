@@ -1,0 +1,21 @@
+{% extends "movie/base.html" %}
+
+{% block bb %}
+    
+    <div class="container"> 
+        <center><h2 class="toto">영화리스트</h2></center>
+        <div class="row"> 
+        {% for movie in movies %}
+            <div class="card col-3" style="width: 18rem;">
+              <div class="card-body">
+                <img src="{{movie.poster_url}}" class="card-img-top" alt="{{movie.poster_url}}">
+                <h4 class="card-title"><a href="{% url 'movies:detail' movie.id %}">{{movie.title}}</a>
+                <span class="badge badge-info">{{movie.score}}</span></h4>
+                <hr width="100%" noshade/>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

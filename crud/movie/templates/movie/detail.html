@@ -1,0 +1,32 @@
+{% extends "movie/base.html" %}
+
+{% block bb %}
+    <h1>{{movie.title}}</h1>
+    <h3>{{movie.title_en}}</h3>
+    <img src="{{movie.poster_url}}" alt="{{movie.poster_url}}" width="175" height="250">
+    <h3>관객 : {{movie.audience}}</h3>
+    <h3>개봉 : {{movie.open_date}}</h3>
+    <h3>장르 : {{movie.genre}}</h3>
+    <h3>연령 : {{movie.watch_grade}}</h3>
+    <h3>평점 : {{movie.score}}</h3>
+    <h5>상세 : {{movie.description}}</h5>
+
+    
+    <a href="{% url 'movies:list' %}">목록</a> <br>
+    <a href="{% url 'movies:update' movie.id %}">수정하기</a><br>
+    <a href="{% url 'movies:delete' movie.id %}">삭제하기</a>
+    
+    <hr>
+    {% for comment in movie.comment_set.all %}
+        
+        <h5>{{comment.content}}</h5>
+    {% endfor %}
+    
+    
+    <form action="{% url 'movies:comment' movie.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="content"/>
+        <input type="submit"/>
+    </form>
+    
+{% endblock %}
